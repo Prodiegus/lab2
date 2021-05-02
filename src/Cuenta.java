@@ -39,6 +39,11 @@ public class Cuenta {
                 return false;
         }
     }
+    //funcion creada para avanzar el mes
+    public boolean mes(){
+        if(!CtaAhorros.nuevoMes())return false;
+        return true;
+    }
     public float saldoA(){//funcion creada para calcular el sueldo total entre cuentas
         this.saldoCuenta = CtaAhorros.getSaldo()+CtaCorriente.getSaldo()+cdt.getSaldo();
         return this.saldoCuenta;

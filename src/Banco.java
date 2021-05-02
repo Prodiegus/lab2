@@ -35,6 +35,11 @@ public class Banco {
         }
         return buscarCuenta(RUN).giro(monto, tCuenta);
     }
+
+    //con este metodo simularemos que el tiempo avanza
+    public void otroMes() {
+        for(int i = 0; i<cuentas.size();i++)cuentas.get(i).mes();  
+    }
     //este metodo es utilizado para verificar si ya existe una cuenta haciendo una busqueda por RUN
     public boolean existe(int RUN){
         if(cuentas.isEmpty())return false;
@@ -48,6 +53,12 @@ public class Banco {
             if(cuentas.get(i).getRUN() == RUN)return cuentas.get(i);
         }
         return null;
+    }
+    public boolean eliminarCuenta(int RUN){
+        if(cuentas.isEmpty())return false;
+        if(!existe(RUN))return false;
+        cuentas.remove(buscarCuenta(RUN));
+        return true;
     }
 
 }

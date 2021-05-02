@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception{
-        System.out.println("Simulador de banco");
-        System.out.println("__________________");
+        int mes=0;
+        System.out.println("Simulador de banco |mes: "+mes);
+        System.out.println("____________________________");
         Banco banco = new Banco();
         //algunas cuentas para agregar casos de prueba
         banco.crearCuenta(12345678, "Maria Rodrigez");
@@ -15,6 +16,10 @@ public class App {
             System.out.println("2.- Buscar cuenta por rut");
             System.out.println("3.- Depositar dinero en una cuenta");
             System.out.println("4.- Realizar un giro a una cuenta");
+            System.out.println("5.- Avazar de mes");
+            System.out.println("6.- Consultar en que mes nos encontramos");
+            System.out.println("7.- Eliminar una cuenta por RUT");
+            System.out.println("8.- cerrar el emulador");
             System.out.print("Opcion: ");
             Scanner entrada = new Scanner(System.in);
             switch(entrada.nextInt()){
@@ -42,11 +47,42 @@ public class App {
                     } catch (Exception e){/*no hacer nada*/}
                     girar(banco, entrada);
                     break;
+                case 5:
+                    System.out.print("Cuantos meses desea avanzar: ");
+                    int incremento = entrada.nextInt();
+                    mes(banco, incremento);
+                    mes+=incremento;
+                    break;
+                case 6:
+                    System.out.println("Usted se cuentra en el mes "+mes+" de la emulacion");
+                    try {
+                        new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    } catch (Exception e){/*no hacer nada*/}
+                    break;
+                case 7:
+                    try {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    } catch (Exception e){/*no hacer nada*/}
+                    eliminar(banco, entrada);
+                    break;
+                case 8:
+                    mes=-10;
+                    try {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    } catch (Exception e){/*no hacer nada*/}
+                    System.out.println("Usted esta cerrando el emulador");
+                    System.out.println("Muchas gracias por haber utilizado este simulador bancario");
+                    try {
+                        new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    } catch (Exception e){/*no hacer nada*/}
+                    break;    
                 default:
                     System.err.println("La opcion digitada no es valida");
             }
 
-        }while(true);
+        }while(mes>=0);
     }
     //este es un menu para crear una cuenta
     private static void crearCuenta(Banco banco, Scanner entrada) {
@@ -114,6 +150,25 @@ public class App {
             System.out.println("Operacion exitosa");
             System.out.println(banco.buscarCuenta(RUN));
         }
+        try {
+            new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e){/*no hacer nada*/}
+    }
+    public static void mes(Banco banco, int mes){
+        System.out.println("Se a emulado el avance de un mes exitosamente");
+        for(int i = 0; i<mes;i++)banco.otroMes();
+        try {
+            new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e){/*no hacer nada*/}
+    }
+    public static void eliminar(Banco banco, Scanner entrada){
+        System.out.println("Menu de emulacion de eliminacion de Cuenta");
+        System.out.println("__________________________________________");
+        System.out.print("Ingrese el RUT del titular de la cuenta: ");
+        if(!banco.eliminarCuenta(entrada.nextInt()))System.err.println("No ha sido posible eliminar la cuenta");
+        System.out.println("Cuenta elimminada exitosamente");
         try {
             new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
