@@ -13,7 +13,7 @@ public class CDT extends Cuenta{
      * ya que saldo es un atrivuto privado.
      */
     public boolean depositar(int monto) {
-        if(monto<0 && contadorDepositos>0)return false;
+        if(monto<0 || contadorDepositos>0)return false;
         this.saldo += monto;
         this.contadorDepositos++;
         return true;

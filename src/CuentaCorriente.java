@@ -10,6 +10,11 @@ public class CuentaCorriente extends Cuenta{
         this.saldo += monto;
         return true;
     }
+    public boolean girar(int monto) {//si el giro falla se retornara falso
+        if(this.saldo < monto || monto<0)return false;
+        this.saldo -= monto;
+        return true;        
+    }
     public float getSaldo() {
         return saldo;
     }

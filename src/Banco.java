@@ -27,6 +27,14 @@ public class Banco {
         }
         return buscarCuenta(RUN).deposito(monto, tCuenta);
     }
+    //este metodo se usara para depositar
+    public boolean girar(int RUN, int monto, int tCuenta){
+        if(!existe(RUN)){
+            System.err.println("\nLa cuenta a la que ustes intenta girar no existe");
+            return false;
+        }
+        return buscarCuenta(RUN).giro(monto, tCuenta);
+    }
     //este metodo es utilizado para verificar si ya existe una cuenta haciendo una busqueda por RUN
     public boolean existe(int RUN){
         if(cuentas.isEmpty())return false;

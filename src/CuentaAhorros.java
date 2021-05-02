@@ -12,6 +12,11 @@ public class CuentaAhorros extends Cuenta {
         this.saldo += monto;
         return true;
     }
+    public boolean girar(int monto) {//si el giro falla se retornara falso
+        if(this.saldo < monto || monto<0)return false;
+        this.saldo -= monto;
+        return true;        
+    }
     //cada vez que se llame esta funcion se restara un 0.6% del saldo total
     public boolean nuevoMes(){
         if(saldo<0)return false;

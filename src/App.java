@@ -14,6 +14,7 @@ public class App {
             System.out.println("1.- Crear cuenta");
             System.out.println("2.- Buscar cuenta por rut");
             System.out.println("3.- Depositar dinero en una cuenta");
+            System.out.println("4.- Realizar un giro a una cuenta");
             System.out.print("Opcion: ");
             Scanner entrada = new Scanner(System.in);
             switch(entrada.nextInt()){
@@ -34,6 +35,12 @@ public class App {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                     } catch (Exception e){/*no hacer nada*/}
                     depositar(banco, entrada);
+                    break;
+                case 4:
+                    try {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    } catch (Exception e){/*no hacer nada*/}
+                    girar(banco, entrada);
                     break;
                 default:
                     System.err.println("La opcion digitada no es valida");
@@ -66,7 +73,7 @@ public class App {
         } catch (Exception e){/*no hacer nada*/}    
     }
     //este metodo tiene la finalidad de crear un deposito
-    public  static void depositar(Banco banco, Scanner entrada){
+    private  static void depositar(Banco banco, Scanner entrada){
         System.out.println("Menu de emulacion de deposito a una cuenta");
         System.out.println("__________________________________________");
         System.out.println("1.- Cuenta Ahorro");
@@ -80,6 +87,29 @@ public class App {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (Exception e) {/*No hacer nada*/}
         if(!banco.depositar(RUN, entrada.nextInt(), tcuenta))System.err.println("Operacion Fallida\n");
+        else{
+            System.out.println("Operacion exitosa");
+            System.out.println(banco.buscarCuenta(RUN));
+        }
+        try {
+            new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e){/*no hacer nada*/}
+    }
+    //este metodo tiene la finalidad de crear un deposito
+    private  static void girar(Banco banco, Scanner entrada){
+        System.out.println("Menu de emulacion de giro a una cuenta");
+        System.out.println("__________________________________________");
+        System.out.println("1.- Cuenta Ahorro");
+        System.out.println("2.- Cuenta Corriente");
+        System.out.print("Porfavor especifique el tipo de cuenta al que desea girar: ");
+        int tcuenta = entrada.nextInt();
+        System.out.print("Porfavor indique el RUT, Cantidas a girar formato(RUT Cantidad): ");
+        int RUN = entrada.nextInt();
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e) {/*No hacer nada*/}
+        if(!banco.girar(RUN, entrada.nextInt(), tcuenta))System.err.println("Operacion Fallida\n");
         else{
             System.out.println("Operacion exitosa");
             System.out.println(banco.buscarCuenta(RUN));
