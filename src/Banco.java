@@ -20,9 +20,12 @@ public class Banco {
     }
 
     //este metodo se usara para depositar
-    public void depositar(){
-        
-        
+    public boolean depositar(int RUN, int monto, int tCuenta){
+        if(!existe(RUN)){
+            System.err.println("\nLa cuenta a la que ustes intenta depositar no existe");
+            return false;
+        }
+        return buscarCuenta(RUN).deposito(monto, tCuenta);
     }
     //este metodo es utilizado para verificar si ya existe una cuenta haciendo una busqueda por RUN
     public boolean existe(int RUN){

@@ -15,24 +15,18 @@ public class Cuenta {
         this.cdt = new CDT(nombre, RUN);
     }
     Cuenta(){}//este costructor esta vacio para evitar un loop recursivo infinito
-    public boolean deposito(int cantidad) {//se debe especificar el tipo de cuenta a depositar
-        if(cantidad<0){return false;}
-        return true;
-        
-    }
-    public boolean deposito(int monto, int tCuenta){
+    public boolean deposito(int monto, int tCuenta){//se debe especificar el tipo de cuenta a depositar
         switch(tCuenta){
             case 1:
                 return this.CtaAhorros.depositar(monto);
             case 2:
-
+                return this.CtaCorriente.depositar(monto);
             case 3:
-
+                return this.cdt.depositar(monto);
             default:
-
-                break;
+                System.err.println("\nopcion digitada no es valida");
+                return false;
         }
-        return false;
     }
     public float saldoA(){//funcion creada para calcular el sueldo total entre cuentas
         this.saldoCuenta = CtaAhorros.getSaldo()+CtaCorriente.getSaldo()+cdt.getSaldo();
