@@ -7,9 +7,11 @@ public class App {
         System.out.println("____________________________");
         Banco banco = new Banco();
         //algunas cuentas para agregar casos de prueba
-        banco.crearCuenta(12345678, "Maria Rodrigez");
-        banco.crearCuenta(186547832, "Marcos Benite");
-        banco.crearCuenta(206097894, "Javiera santander");
+        /*
+          banco.crearCuenta(12345678, "Maria Rodrigez");
+          banco.crearCuenta(186547832, "Marcos Benite");
+          banco.crearCuenta(206097894, "Javiera santander");
+          */
         do{
             System.out.println("Eliga Una de las siguientes opciones: ");
             System.out.println("1.- Crear cuenta");
