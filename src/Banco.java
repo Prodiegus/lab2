@@ -15,6 +15,8 @@ public class Banco {
         if(existe(RUN))System.err.println("La cuenta que usted desea ingresar ya existe");
         Cuenta cuenta = new Cuenta(nombre, RUN);
         cuentas.add(cuenta);
+        BD bd = new BD();
+        if(!bd.add(nombre, RUN))System.err.println("Fallo en la base de datos");
         System.out.println("Cuenta creada exitosamente: \n"+cuenta);
     
     }
@@ -38,25 +40,24 @@ public class Banco {
 
     //con este metodo simularemos que el tiempo avanza
     public void otroMes() {
-        for(int i = 0; i<cuentas.size();i++)cuentas.get(i).mes();  
+        for(int i = 0; i<cuentas.size();i++){
+            cuentas.get(i).mes();
+        }
     }
     //este metodo es utilizado para verificar si ya existe una cuenta haciendo una busqueda por RUN
     public boolean existe(int RUN){
-        if(cuentas.isEmpty())return false;
         if(buscarCuenta(RUN) != null && buscarCuenta(RUN).getRUN() == RUN)return true;
         return false;
     }
     //este metodo busca una cuenta
     public Cuenta buscarCuenta(int RUN){ 
-        if(cuentas.isEmpty())return null;
-        for(int i = 0; i<cuentas.size();i++){
-            if(cuentas.get(i).getRUN() == RUN)return cuentas.get(i);
-        }
-        return null;
+        BD bd = new BD();
+        return bd.search(RUN);
     }
     public boolean eliminarCuenta(int RUN){
-        if(cuentas.isEmpty())return false;
         if(!existe(RUN))return false;
+        BD bd = new BD();
+        bd.delete(RUN);
         cuentas.remove(buscarCuenta(RUN));
         return true;
     }

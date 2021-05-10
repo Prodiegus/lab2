@@ -3,9 +3,9 @@ public class Cuenta {
     protected String Nombre;
     protected int RUN;
     protected float saldoCuenta;
-    private CuentaAhorros CtaAhorros;
-    private CuentaCorriente CtaCorriente;
-    private CDT cdt;
+    public CuentaAhorros CtaAhorros;
+    public CuentaCorriente CtaCorriente;
+    public CDT cdt;
     Cuenta(String nombre, int RUN) {
         Nombre = nombre;
         this.RUN = RUN;
@@ -14,7 +14,7 @@ public class Cuenta {
         this.CtaCorriente = new CuentaCorriente(nombre, RUN);
         this.cdt = new CDT(nombre, RUN);
     }
-    Cuenta(){}//este costructor esta vacio para evitar un loop recursivo infinito
+    Cuenta(int RUN){this.RUN = RUN;}
     public boolean deposito(int monto, int tCuenta){//se debe especificar el tipo de cuenta a depositar
         switch(tCuenta){
             case 1:
@@ -24,7 +24,7 @@ public class Cuenta {
             case 3:
                 return this.cdt.depositar(monto);
             default:
-                System.err.println("\nopcion digitada no es valida");
+                System.err.println("\nOpcion digitada no es valida");
                 return false;
         }
     }
@@ -35,7 +35,7 @@ public class Cuenta {
             case 2:
                 return this.CtaCorriente.girar(monto);
             default:
-                System.err.println("\nopcion digitada no es valida");
+                System.err.println("\nOpcion digitada no es valida");
                 return false;
         }
     }
@@ -53,7 +53,7 @@ public class Cuenta {
     @Override
     public String toString() {
         //el saldo total de la cuenta se vera por medio de una funcion que cada vez que se necesite sera actualizado
-        return "\nNombre: " + Nombre + "\nRUN: " + RUN + "\nSaldo Cuenta: " + saldoA()+"\n\n";
+        return "\nNombre: " + Nombre + "\nRUT: " + RUN + "\nSaldo Cuenta: " + saldoA()+"\n\n";
     }
     
 }
