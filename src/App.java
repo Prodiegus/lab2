@@ -4,12 +4,11 @@ public class App {
     public static void main(String[] args) throws Exception{
         int mes=0;
         Banco banco = new Banco();
-        //algunas cuentas para agregar casos de prueba
-        /*
-          banco.crearCuenta(12345678, "Maria Rodrigez");
+        //algunas cuentas para agregar casos de prueba descomentar en caso de querer agregarlas
+        
+         /* banco.crearCuenta(12345678, "Maria Rodrigez");
           banco.crearCuenta(186547832, "Marcos Benite");
-          banco.crearCuenta(206097894, "Javiera santander");
-          */
+          banco.crearCuenta(206097894, "Javiera Santander");*/
         do{
             System.out.println("Simulador de banco |mes: "+mes);
             System.out.println("____________________________");
@@ -19,9 +18,8 @@ public class App {
             System.out.println("3.- Depositar dinero en una cuenta");
             System.out.println("4.- Realizar un giro a una cuenta");
             System.out.println("5.- Avazar de mes");
-            System.out.println("6.- Consultar en que mes nos encontramos");
-            System.out.println("7.- Eliminar una cuenta por RUT");
-            System.out.println("8.- cerrar el emulador");
+            System.out.println("6.- Eliminar una cuenta por RUT");
+            System.out.println("7.- cerrar el emulador");
             System.out.print("Opcion: ");
             Scanner entrada = new Scanner(System.in);
             switch(entrada.nextInt()){
@@ -64,19 +62,12 @@ public class App {
                     }
                     break;
                 case 6:
-                    System.out.println("Usted se cuentra en el mes "+mes+" de la emulacion");
-                    try {
-                        new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
-                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                    } catch (Exception e){/*no hacer nada*/}
-                    break;
-                case 7:
                     try {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                     } catch (Exception e){/*no hacer nada*/}
                     eliminar(banco, entrada);
                     break;
-                case 8:
+                case 7:
                     mes=-10;
                     try {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -166,8 +157,12 @@ public class App {
         } catch (Exception e){/*no hacer nada*/}
     }
     private static void mes(Banco banco, int mes){
+        for(int i = 0; i<mes;i++){
+            banco.otroMes();
+            BD bd = new BD();
+            bd.tiempoMeses();
+        }
         System.out.println("Se a emulado el avance de mes exitosamente");
-        for(int i = 0; i<mes;i++)banco.otroMes();
         try {
             new ProcessBuilder("cmd", "/c", "pause").inheritIO().start().waitFor();
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();

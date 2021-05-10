@@ -3,7 +3,7 @@ public class CDT extends Cuenta{
     private float saldo;
     private int contadorDepositos;
     public CDT(String nombre, int RUN) {
-        super();
+        super(RUN);
         this.contadorDepositos = 0;
         this.saldo = 0f;
     }
@@ -12,13 +12,15 @@ public class CDT extends Cuenta{
      * ademas la unica manera de cambiar el saldo es por medio de este metodo
      * ya que saldo es un atrivuto privado.
      */
-    public boolean depositar(int monto) {
+    public boolean depositar(float monto) {
         if(monto<0 || contadorDepositos>0)return false;
         this.saldo += monto;
+        BD bd = new BD();
+        bd.modificarSaldo(this.saldo, "saldoCDT", RUN);
         this.contadorDepositos++;
         return true;
     }
-    public float getSaldo() {
+    protected float getSaldo() {
         return saldo;
     }
 }
